@@ -45,7 +45,7 @@ Also uses:
 ### 🔁 Image Transitions
 | Chai | Matcha | Juice | Cold Drink | Coca |
 |------|--------|-------|-------------|------|
-| ![chai](images/chai.png) | ![matcha](images/matcha.png) | ![juice](images/juice.png) | ![cold drink](images/cold drink.png) | ![coca](images/coca.png) |
+| ![chai](images/chai.png) | ![matcha](images/matcha.png) | ![juice](images/juice.png) | ![cold drink](images/colddrink.png) | ![coca](images/coca.png) |
 
 ### 🎨 Background Themes
 | Monster | Sprite | Smoothy |
