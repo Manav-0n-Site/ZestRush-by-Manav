@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZestRush-by-Manav</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2k7V51C+D/4T5I4z6yPq4tqP+H6aQ2h7A/qWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="main" id="main">
+    <div class="circle-transition" id="circle"></div>
+
+    <div class="main-bg-content">
+      <header>
+        <div class="logo">
+          <img src="images/logo.png" alt="ZestRush Logo" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" />
+          <span style="color: #ff8800;" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="2000">Zest</span><span style="color: white;" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="2500">Rush</span>
+        </div>
+        <div class="nav-links">
+        </div>
+        <a href="https://github.com/Manav-0n-Site" class="header-contact-button" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="2500">
+          <i class="fa-brands fa-github"></i>
+          <span>GitHub</span>
+        </a>
+      </header>
+
+      <div class="hero">
+        <div class="left" data-aos="zoom-out-up" data-aos-duration="2500">
+          <h4>Best Drinks!</h4>
+          <h1>Sip Bold. Live Loud. <br> Drink ZestRush!</h1>
+          <p>Yo! I’m <a href="" class="manav" onclick="alert('soon my portfolio website link will be here!')">Manav</a>, a 12th-grade student bringing you something refreshingly different. Welcome to ZestRush – where bold flavors crash into cool vibes. From zesty citrus pops to icy blends that wake your senses, every drink is crafted to fuel your mood and boost your vibe. It’s not just about thirst – it’s about attitude, energy, and expression. At ZestRush, we don’t just serve drinks – we serve moments. Ready to sip the rush?</p>
+          <div class="buttons">
+            <a href="#order-now" class="order" onclick="alert('this is just a design prortotype only')">Order Now --></a>
+            <a href="#contact-us-hero" class="contact"  onclick="alert('this is just a design prortotype only')">Give Feedback!</a>
+          </div>
+        </div>
+        <div class="right" id="imageContainer" data-aos="zoom-out-down" data-aos-duration="2500">
+          <img class="coffee-image" src="images/coffe.png" style="rotate: -5deg;" alt="Coffee" />
+          <img class="coffee-image" src="images/matcha.png" style="rotate: -20deg;" alt="Matcha" />
+          <img class="coffee-image" src="images/chai.png" style="rotate: -20deg;" alt="Chai" />
+          <img class="coffee-image" src="images/cold drink.png" style="rotate: -20deg;" alt="Cold Drink" />
+          <img class="coffee-image" src="images/juice.png" style="rotate: -20deg;" alt="Juice" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    const images = document.querySelectorAll('.coffee-image');
+    const circle = document.getElementById('circle');
+    const main = document.getElementById('main');
+    const bgColors = ['#3c0e13', '#47212b', '#583131', '#4b1f14', '#3b1618', '#2f1e1c', '#2e0f0f'];
+     
+    let current = 0;
+    let animationInterval;
+    let timeoutId;
+
+    function showNextImageDesktop() {
+      // Hide current image
+      images[current].classList.remove('show');
+      images[current].classList.add('hide');
+
+      // Prepare circle
+      const rect = images[current].getBoundingClientRect();
+      circle.style.left = `${rect.left + rect.width / 2}px`;
+      circle.style.top = `${rect.top + rect.height / 2}px`;
+      circle.style.backgroundColor = bgColors[(current + 1) % bgColors.length];
+      circle.style.transform = 'scale(0)';
+      circle.style.transition = 'none';
+
+      // Trigger circle animation
+      setTimeout(() => {
+        circle.style.transition = 'transform 1s ease-out';
+        circle.style.transform = 'scale(35)';
+      }, 50);
+
+      // Move to next image
+      current = (current + 1) % images.length;
+
+      // After transition
+      setTimeout(() => {
+        main.style.backgroundColor = bgColors[current];
+        images.forEach(img => img.classList.remove('show', 'hide'));
+        images[current].classList.add('show');
+        circle.style.transform = 'scale(0)';
+      }, 1000);
+    }
+     
+    function showNextImageMobile() {
+      // Hide current image and start its exit transition
+      images[current].classList.remove('show');
+      images[current].classList.add('hide');
+       
+      // Calculate the next image index
+      const nextIndex = (current + 1) % images.length;
+
+      // Set the next image to be off-screen right and visible
+      images[nextIndex].style.opacity = 1;
+      images[nextIndex].style.transform = 'translateX(100%)';
+       
+      // Immediately start the slide-in transition for the next image
+      // using a setTimeout to ensure the browser registers the initial position
+      setTimeout(() => {
+        images[nextIndex].style.transform = 'translateX(0)';
+      }, 50);
+
+      // After the slide-in transition (1s), pause for 2s, then slide out
+      timeoutId = setTimeout(() => {
+        // Start the slide-out transition
+        images[nextIndex].style.transform = 'translateX(-100%)';
+        images[nextIndex].style.opacity = 0;
+         
+        // After the slide-out transition, reset position and update current index
+        setTimeout(() => {
+          images[nextIndex].style.transform = 'translateX(100%)'; // Reset for next loop
+          current = nextIndex;
+          showNextImageMobile(); // Start the next iteration
+        }, 1000); // Duration of the slide-out transition
+      }, 3000); // 1s (slide-in) + 2s (pause) = 3s total delay before slide-out
+    }
+
+    function initializeAnimations() {
+      if (animationInterval) {
+        clearInterval(animationInterval);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      if (window.innerWidth > 768) {
+        // Desktop: Enable animations with circle transition
+        images.forEach(img => img.style.display = '');
+        images[current].classList.add('show');
+        main.style.backgroundColor = bgColors[current];
+        animationInterval = setInterval(showNextImageDesktop, 4000);
+      } else {
+        // Mobile: Enable sliding animation
+        images.forEach(img => {
+          img.classList.remove('show', 'hide');
+          img.style.display = 'block';
+          img.style.opacity = 0;
+          img.style.transform = 'translateX(100%)';
+        });
+
+        // Start the first image's animation
+        images[current].style.opacity = 1;
+        images[current].style.transform = 'translateX(0)';
+
+        // Start the main animation loop for mobile
+        timeoutId = setTimeout(() => {
+          images[current].style.transform = 'translateX(-100%)';
+          images[current].style.opacity = 0;
+          setTimeout(() => {
+            current = (current + 1) % images.length;
+            showNextImageMobile();
+          }, 1000);
+        }, 3000); // 1s (initial slide-in) + 2s (pause)
+      }
+    }
+
+    // Call the function on load and resize
+    window.addEventListener('load', initializeAnimations);
+    window.addEventListener('resize', initializeAnimations);
+  </script>
+
+</body>
+</html>
