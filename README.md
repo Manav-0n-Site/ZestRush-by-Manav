@@ -40,7 +40,7 @@ Also uses:
 ## 📸 Screenshots
 
 ### 💡 Hero Section
-![Hero](images/coffe.png)
+![Hero](images/chai.png)
 
 ### 🔁 Image Transitions
 | Chai | Matcha | Juice | Cold Drink | Coca |
